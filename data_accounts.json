@@ -1,21 +1,19 @@
 {
   "accounts": [
     {
-      "id": "bbd7cad0-cb56-4aff-b26c-68f3918a4adb",
       "type": "demo",
       "bank": "demo",
-      "name": "testacc1",
+      "name": "testacc2",
       "currency": "MDL",
-      "balance": 0,
+      "balance": 670,
       "nature": "credit_card"
     },
     {
-      "id": "1f67bbc9-e224-4983-9320-5cf5a8a2cd85",
       "type": "demo",
       "bank": "demo",
       "name": "testacc1",
       "currency": "MDL",
-      "balance": 0,
+      "balance": 710,
       "nature": "credit_card"
     }
   ]
