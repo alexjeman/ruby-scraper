@@ -5,25 +5,39 @@ class Accounts
     @file_path = './data_accounts.json'
   end
 
-  def add_account(type, name, bank, currency, nature)
+  def add_account(bank, name, currency, balance = 0, nature = 'credit_card', transactions = [])
     account_data = load_file
     new_account = {
-      'type' => type,
       'bank' => bank,
       'name' => name,
       'currency' => currency,
-      'balance' => 0,
-      'nature' => nature
+      'balance' => balance,
+      'nature' => nature,
+      'transactions' => transactions
     }
 
     account_data['accounts'].append(new_account)
     save_file(account_data)
   end
 
-  def update_account(name, key, value)
+
+  def get_account_transactions(account_name)
+    accounts = load_file['accounts']
+    current_acc = accounts.select { |account| account['name'] == account_name }
+    [current_acc.first['transactions']]
+  end
+
+  def update_account_val(name, key, value, method)
     accounts = load_file['accounts']
     current_acc = accounts.select { |account| account['name'] == name }.tap { |account| accounts -= account }
-    current_acc.first[key] = value
+    case method
+    when 'update'
+      current_acc.first[key] = value
+    when 'add'
+      current_acc.first[key] += value
+    else
+      return 'Method update or add is required'
+    end
     accounts.append(current_acc.first)
     save_file({ 'accounts' => accounts })
   end
@@ -42,7 +56,11 @@ class Accounts
   end
 end
 
-account_test = Accounts.new
-
-# account_test.add_account('demo', 'testacc2', 'demo', 'MDL', 'credit_card')
-# account_test.update_account('testacc1', 'balance', 710)
+# account_test = Accounts.new
+#
+# account_test.add_account('demo_bank', 'testacc1', 'MDL')
+# puts account_test.get_account_transactions('testacc1')
+# # account_test.update_account_val('testacc1', 'balance', 710)
+# new_transac = {"date"=>"2015-01-18", "description"=>"bought food 4", "amount"=>-30, "currency"=>"MDL", "account_name"=>"account1"}
+#
+# account_test.update_account_val('testacc1', 'transactions', [new_transac], 'add')

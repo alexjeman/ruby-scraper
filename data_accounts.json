@@ -1,20 +1,27 @@
 {
   "accounts": [
     {
-      "type": "demo",
-      "bank": "demo",
-      "name": "testacc2",
-      "currency": "MDL",
-      "balance": 670,
-      "nature": "credit_card"
-    },
-    {
-      "type": "demo",
-      "bank": "demo",
+      "bank": "demo_bank",
       "name": "testacc1",
       "currency": "MDL",
-      "balance": 710,
-      "nature": "credit_card"
+      "balance": 0,
+      "nature": "credit_card",
+      "transactions": [
+        {
+          "date": "2015-01-18",
+          "description": "bought food 3",
+          "amount": -30,
+          "currency": "MDL",
+          "account_name": "account1"
+        },
+        {
+          "date": "2015-01-18",
+          "description": "bought food 4",
+          "amount": -30,
+          "currency": "MDL",
+          "account_name": "account1"
+        }
+      ]
     }
   ]
 }
