@@ -5,15 +5,15 @@ class Accounts
     @file_path = './data_accounts.json'
   end
 
-  def add_account(bank, name, currency, balance = 0, nature = 'credit_card', transactions = [])
+  def add_account(**kwargs)
     account_data = load_file
     new_account = {
-      'bank' => bank,
-      'name' => name,
-      'currency' => currency,
-      'balance' => balance,
-      'nature' => nature,
-      'transactions' => transactions
+      'bank' => kwargs.fetch(:bank),
+      'name' => kwargs.fetch(:name),
+      'currency' => kwargs.fetch(:currency),
+      'balance' => kwargs.fetch(:balance, 0),
+      'nature' => kwargs.fetch(:nature, 'credit_card'),
+      'transactions' => kwargs.fetch(:transactions, [])
     }
 
     account_data['accounts'].append(new_account)
@@ -58,7 +58,7 @@ end
 
 # account_test = Accounts.new
 #
-# account_test.add_account('demo_bank', 'testacc1', 'MDL')
+# account_test.add_account(bank:'demo_bank', name:'testacc1', currency:'MDL')
 # puts account_test.get_account_transactions('testacc1')
 # # account_test.update_account_val('testacc1', 'balance', 710)
 # new_transac = {"date"=>"2015-01-18", "description"=>"bought food 4", "amount"=>-30, "currency"=>"MDL", "account_name"=>"account1"}
